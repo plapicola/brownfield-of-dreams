@@ -41,6 +41,8 @@
     }
 
     function bookmarkVideo() {
+      document.getElementById("bookmark-outcome").innerHTML = '';
+      await sleep(150)
       console.log('<%= facade.current_video.video_id %>')
       fetch('/api/v1/bookmarks', {
         method: "POST",
@@ -49,9 +51,16 @@
         },
         body: JSON.stringify({video_id:"<%= facade.current_video.id %>", authenticity_token:"<%= form_authenticity_token %>"})
       })
-      .then((response) => JSON.parse(response))
       .then(function(response){
-        console.log("hello");
+        let target = document.getElementById("bookmark-outcome")
+        target.style.display = "block";
+        if (response.status === 302) {
+          target.innerHTML = "You have already bookmarked this video.";
+        } else if (response.status === 200){
+          target.innerHTML = "You've successfully bookmarked the video!";
+        } else {
+          target.innerHTML = "Something went wrong. If the problem continues please contact Jeff.";
+        }
       });
     }
 
