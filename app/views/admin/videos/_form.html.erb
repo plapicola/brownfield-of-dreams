@@ -1,0 +1,13 @@
+<div class="mt1" id="new-video-form">
+  <h3>Video</h3>
+  <%= form_for [:admin, @tutorial, @video] do |f| %>
+    <%= f.label :title, class: "block" %>
+    <%= f.text_field :title, class: "field block"%>
+    <%= f.label :description, class: "block" %>
+    <%= f.text_field :description, class: "field block"%>
+    <%= f.label "YouTube ID", class: "block" %>
+    <%= f.text_field :video_id, class: "field block"%>
+
+    <%= f.submit nil, class: "mt1 btn btn-outline"  %>
+  <% end %>
+</div>
