@@ -33,7 +33,7 @@ describe 'A registered user' do
   end
 
   it 'shows me videos i have Bookmarked on my dashboard' do
-    tutorial= create(:tutorial)
+    tutorial = create(:tutorial)
     video = create(:video, tutorial_id: tutorial.id)
     user = create(:user)
     create(:user_video, user_id: user.id, video_id: video.id)

@@ -7,25 +7,14 @@
     <%= link_to "Add Video", "#", "data-action" => "click->tutorials#showVideoForm", class: "video-position-submit btn btn-outline", id: @tutorial.id %>
   </div>
 
-  <div class="mt1" id="new-video-form">
-    <h3>New Video</h3>
-    <%= form_for [:admin, @tutorial, Video.new] do |f| %>
-      <%= f.label :title, class: "block" %>
-      <%= f.text_field :title, class: "field block"%>
-      <%= f.label :description, class: "block" %>
-      <%= f.text_field :description, class: "field block"%>
-      <%= f.label "YouTube ID", class: "block" %>
-      <%= f.text_field :video_id, class: "field block"%>
-
-      <%= f.submit "Create Video", class: "mt1 btn btn-outline"  %>
-    <% end %>
-  </div>
+  <%= render partial: 'admin/videos/form' %>
 
   <div id="video-list">
     <% @tutorial.videos.each do |video| %>
-      <div class="video" data-id="<%= video.id %>" class="border rounded mt2 p1">
-        <%= link_to video.title, tutorial_path(@tutorial, video_id: video.id) %><br>
+      <div class="video border rounded mt2 p1" data-id="<%= video.id %>">
+        <%= link_to video.title, tutorial_path(@tutorial, video_id: video.id) %>
         <img class="thumbnail" src= <%="#{video.thumbnail}" %> >
+        <%= button_to "Edit Video", edit_admin_video_path(video), method: :get, class: 'mt2 btn btn-primary mb1 bg-teal' %><br>
       </div>
     <% end %>
   </div>

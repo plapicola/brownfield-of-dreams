@@ -1,11 +1,12 @@
 class Admin::VideosController < Admin::BaseController
   def edit
-    @video = Video.find(params[:video_id])
+    @video = Video.find(params[:id])
   end
 
   def update
     video = Video.find(params[:id])
-    video.update(video_params)
+    video.update(new_video_params)
+    redirect_to edit_admin_tutorial_path(video.tutorial)
   end
 
   def create

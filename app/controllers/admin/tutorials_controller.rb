@@ -1,6 +1,7 @@
 class Admin::TutorialsController < Admin::BaseController
   def edit
     @tutorial = Tutorial.find(params[:id])
+    @video = Video.new
   end
 
   def create
