@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'As an admin' do
@@ -12,7 +14,7 @@ describe 'As an admin' do
 
       fill_in 'tutorial[title]', with: "I'm a test"
       fill_in 'tutorial[description]', with: "I'm a description for a test"
-      fill_in 'tutorial[thumbnail]', with: "https://fakecompany.com/thisisathumbnail.png"
+      fill_in 'tutorial[thumbnail]', with: 'https://fakecompany.com/thisisathumbnail.png'
 
       click_button 'Save'
 
@@ -28,7 +30,7 @@ describe 'As an admin' do
 
       expect(page).to have_content("Title can't be blank")
       expect(page).to have_content("Description can't be blank")
-      expect(page).to have_content("Thumbnail is an invalid URL")
+      expect(page).to have_content('Thumbnail is an invalid URL')
     end
   end
 end

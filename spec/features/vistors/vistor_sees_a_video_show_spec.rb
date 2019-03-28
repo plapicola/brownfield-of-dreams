@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'visitor sees a video show' do
@@ -19,6 +21,6 @@ describe 'visitor sees a video show' do
 
     visit tutorial_path(tutorial)
 
-    expect(page).to have_content("This tutorial is currently empty.")
+    expect(page).to have_content('This tutorial is currently empty.')
   end
 end

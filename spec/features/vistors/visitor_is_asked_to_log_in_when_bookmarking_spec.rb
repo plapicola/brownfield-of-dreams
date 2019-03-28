@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'visitor visits video show page' do
@@ -11,6 +13,6 @@ describe 'visitor visits video show page' do
 
     expect(current_path).to eq(login_path)
 
-    expect(page).to have_content("You must be logged in to bookmark a video.")
+    expect(page).to have_content('You must be logged in to bookmark a video.')
   end
 end

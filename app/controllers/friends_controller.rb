@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendsController < ApplicationController
   def create
     friend_user = User.find_by_uid(params[:friend_uid])
@@ -20,10 +22,8 @@ class FriendsController < ApplicationController
   private
 
   def add_friend(friend_user)
-    begin
-      Friend.create(user: current_user, friend_user: friend_user)
-    rescue
-      flash[:error] = "Unable to add user as a friend. Please try again."
-    end
+    Friend.create(user: current_user, friend_user: friend_user)
+  rescue StandardError
+    flash[:error] = 'Unable to add user as a friend. Please try again.'
   end
 end

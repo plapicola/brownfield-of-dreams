@@ -1,5 +1,6 @@
-class InviteMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class InviteMailer < ApplicationMailer
   def invite(user, recipient)
     recipient = GithubService.new(user).get_user(recipient)
     @invite = InviteFacade.new(user, recipient)

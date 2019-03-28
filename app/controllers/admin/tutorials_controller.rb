@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::TutorialsController < Admin::BaseController
   def edit
     @tutorial = Tutorial.find(params[:id])
@@ -10,7 +12,7 @@ class Admin::TutorialsController < Admin::BaseController
       flash[:success] = "Successfully created \"#{@tutorial.title}\"."
       redirect_to tutorial_path(@tutorial)
     else
-      flash[:errors] = "There are problems with the provided information."
+      flash[:errors] = 'There are problems with the provided information.'
       render :new
     end
   end
@@ -33,6 +35,7 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   private
+
   def tutorial_params
     params.require(:tutorial).permit(:title, :description, :thumbnail, :tag_list)
   end

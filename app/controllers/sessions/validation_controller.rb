@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Sessions::ValidationController < ApplicationController
   before_action :require_unverified_login
 

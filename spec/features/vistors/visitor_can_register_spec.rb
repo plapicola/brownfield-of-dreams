@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'vister can create an account', :js do
@@ -29,8 +31,8 @@ describe 'vister can create an account', :js do
     click_on 'Create Account'
 
     expect(current_path).to eq(validation_landing_path)
-    expect(page).to have_content("Your account has been created.")
-    expect(page).to have_content("Please check your email to validate your account.")
+    expect(page).to have_content('Your account has been created.')
+    expect(page).to have_content('Please check your email to validate your account.')
   end
 
   it 'visitors cannot register with invalid information' do
@@ -52,7 +54,7 @@ describe 'vister can create an account', :js do
     fill_in 'user[first_name]', with: @first_name
     fill_in 'user[last_name]', with: @last_name
     fill_in 'user[password]', with: @password
-    fill_in 'user[password_confirmation]', with: "secret"
+    fill_in 'user[password_confirmation]', with: 'secret'
 
     click_on 'Create Account'
 
@@ -72,9 +74,9 @@ describe 'vister can create an account', :js do
 
     visit 'http://localhost:1080'
 
-    allow_any_instance_of(ActionDispatch::Request::Session).
-      to receive(:[]).
-      and_return(User.last.id)
+    allow_any_instance_of(ActionDispatch::Request::Session)
+      .to receive(:[])
+      .and_return(User.last.id)
 
     emails = page.find_all('tr')
     within emails[1] do

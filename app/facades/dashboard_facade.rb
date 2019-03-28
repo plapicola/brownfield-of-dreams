@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DashboardFacade
   def initialize(user)
     @user = user
@@ -35,17 +37,17 @@ class DashboardFacade
   end
 
   def friends
-    @friends ||= User.select("friend_users_friends.*")
+    @friends ||= User.select('friend_users_friends.*')
                      .distinct
-                     .joins(friends: {friend_user: :friends})
+                     .joins(friends: { friend_user: :friends })
                      .where(id: @user)
   end
 
   def pending_requests
-    @pending_requests = User.joins("JOIN friends a ON a.user_id = users.id")
+    @pending_requests = User.joins('JOIN friends a ON a.user_id = users.id')
                             .joins("LEFT OUTER JOIN friends b ON a.friend_user_id = b.user_id
                                     AND a.user_id = b.friend_user_id")
-                            .where("a.friend_user_id = ?", @user.id)
-                            .where("b.id IS NULL")
+                            .where('a.friend_user_id = ?', @user.id)
+                            .where('b.id IS NULL')
   end
 end

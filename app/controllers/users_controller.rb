@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :require_validated_login, only: :show
 
@@ -31,5 +33,4 @@ class UsersController < ApplicationController
     session[:user_id] = @user.id
     redirect_to validation_landing_path
   end
-
 end

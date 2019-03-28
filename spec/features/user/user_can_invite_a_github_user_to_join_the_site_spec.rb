@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'as a user' do
@@ -6,7 +8,7 @@ describe 'as a user' do
   end
 
   it 'should show me a link to send an invite on my dashboard' do
-    VCR.use_cassette("views/dashboard_github_request") do
+    VCR.use_cassette('views/dashboard_github_request') do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
       visit dashboard_path
@@ -27,12 +29,12 @@ describe 'as a user' do
   end
 
   it 'should show me the flash message when it could send the invite' do
-    VCR.use_cassette("feature/send_invite") do
+    VCR.use_cassette('feature/send_invite') do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
       visit invite_path
 
-      fill_in "Github handle", with: "plapicola"
+      fill_in 'Github handle', with: 'plapicola'
       click_button('Send Invite')
 
       expect(current_path).to eq(dashboard_path)
@@ -41,12 +43,12 @@ describe 'as a user' do
   end
 
   it 'should show me flash message when it could not send the invite' do
-    VCR.use_cassette("feature/send_bad_invite") do
+    VCR.use_cassette('feature/send_bad_invite') do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
       visit invite_path
 
-      fill_in "Github handle", with: "tymazey"
+      fill_in 'Github handle', with: 'tymazey'
       click_button('Send Invite')
 
       expect(current_path).to eq(dashboard_path)

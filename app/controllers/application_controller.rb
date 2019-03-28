@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :find_bookmark
@@ -15,12 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   def require_github_user
-    redirect_to root_path unless current_user && current_user.github_token
+    redirect_to root_path unless current_user&.github_token
   end
 
   def require_validated_login
-    flash[:error] = "You must verify your email to continue." if current_user && !current_user.verified
-    redirect_to login_path unless current_user && current_user.verified
+    flash[:error] = 'You must verify your email to continue.' if current_user && !current_user.verified
+    redirect_to login_path unless current_user&.verified
   end
 
   def require_unverified_login

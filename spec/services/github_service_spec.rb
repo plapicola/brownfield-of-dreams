@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Github Service' do
@@ -15,9 +17,9 @@ describe 'Github Service' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
 
-        result = VCR.use_cassette("services/user_repositories") {
+        result = VCR.use_cassette('services/user_repositories') do
           GithubService.new(user).user_repositories
-        }
+        end
 
         expect(result).to be_a(Array)
         expect(result[0]).to be_a(Hash)
@@ -31,9 +33,9 @@ describe 'Github Service' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
 
-        result = VCR.use_cassette("services/user_followers") {
+        result = VCR.use_cassette('services/user_followers') do
           GithubService.new(user).user_followers
-        }
+        end
 
         expect(result).to be_a(Array)
         expect(result[0]).to be_a(Hash)
@@ -47,9 +49,9 @@ describe 'Github Service' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
 
-        result = VCR.use_cassette("services/user_following") {
+        result = VCR.use_cassette('services/user_following') do
           GithubService.new(user).user_following
-        }
+        end
 
         expect(result).to be_a(Array)
         expect(result[0]).to be_a(Hash)
@@ -62,9 +64,9 @@ describe 'Github Service' do
       it 'returns the email address for a github user' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
-        
-        result = VCR.use_cassette("services/github_email") do
-          GithubService.new(user).get_user("plapicola")
+
+        result = VCR.use_cassette('services/github_email') do
+          GithubService.new(user).get_user('plapicola')
         end
 
         expect(result).to be_a(Hash)
