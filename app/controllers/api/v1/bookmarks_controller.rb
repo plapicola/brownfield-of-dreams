@@ -1,7 +1,8 @@
 class Api::V1::BookmarksController < ApplicationController
 
   def create
-    render json: UserVideoSerializer.new(current_user.user_videos.create!(user_video_params))
+    return head(302) if current_user.user_videos.find_by(user_video_params)
+    render json: UserVideoSerializer.new(current_user.user_videos.find_or_create_by(user_video_params))
   end
 
   private
