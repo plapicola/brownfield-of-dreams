@@ -117,6 +117,25 @@ describe 'As a user' do
       end
     end
 
+    it 'I cant add a friend I already have' do
+      allow_any_instance_of(ApplicationController).to(
+        receive(:current_user).and_return(@user))
+
+      VCR.use_cassette('views/dashboard_github_request') do
+        visit dashboard_path
+      end
+      Friend.create!(user: @user, friend_user: @potential_friend)
+
+      VCR.use_cassette('views/dashboard_github_request') do
+        within "#following-#{@potential_friend.uid}" do
+          click_button 'Add as Friend'
+        end
+
+        message = "Unable to add user as a friend. Please try again."
+        expect(page).to have_content(message)
+      end
+    end
+
     it 'I see a section for pending friend requests on my dashbard' do
       allow_any_instance_of(ApplicationController).to(
         receive(:current_user).and_return(@potential_friend))

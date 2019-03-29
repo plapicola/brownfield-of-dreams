@@ -21,7 +21,9 @@ class FriendsController < ApplicationController
 
   def add_friend(friend_user)
     begin
-      Friend.create(user: current_user, friend_user: friend_user)
+      friend_info = {user: current_user, friend_user: friend_user}
+      raise StandardError if Friend.find_by(friend_info)
+      Friend.create(friend_info)
     rescue
       flash[:error] = "Unable to add user as a friend. Please try again."
     end
