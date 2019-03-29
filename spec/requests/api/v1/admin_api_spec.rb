@@ -18,4 +18,16 @@ describe 'as admin', type: :request do
     expect(json["id"]).to eq(tutorial.id)
     expect(json["title"]).to eq(tutorial.title)
   end
+
+  it 'renders json when visiting the tutorial api endpoint' do
+    video = create(:video)
+    tutorial = create(:tutorial, videos: [video])
+    tut_serial = {tutorial_sequencer: {_json: [video.id]}}
+
+
+
+    expect {put admin_api_v1_path(tutorial, tut_serial)}.to(
+      raise_error(ActionController::RoutingError)
+    )
+  end
 end
