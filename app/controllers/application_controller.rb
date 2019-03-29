@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   def require_unverified_login
     redirect_to root_path unless current_user
-    redirect_to dashboard_path if current_user.verified
+    redirect_to dashboard_path if current_user&.verified
   end
 
   private
