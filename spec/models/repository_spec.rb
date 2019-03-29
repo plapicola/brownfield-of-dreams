@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Repository do
-
   it 'exists' do
     repository = Repository.new({})
 
@@ -9,7 +10,7 @@ describe Repository do
   end
 
   it 'has attributes' do
-    repo = Repository.new({name: 'name', html_url: 'url'})
+    repo = Repository.new(name: 'name', html_url: 'url')
 
     expect(repo.name).to eq('name')
     expect(repo.url).to eq('url')

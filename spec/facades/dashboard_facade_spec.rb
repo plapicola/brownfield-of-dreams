@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Dashboard facade' do
@@ -12,7 +14,7 @@ describe 'Dashboard facade' do
       it 'returns a collection of repositories for the user' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
-        VCR.use_cassette("/facades/dashboard_repositories_request") do
+        VCR.use_cassette('/facades/dashboard_repositories_request') do
           facade = DashboardFacade.new(user)
 
           expect(facade.repositories).to be_a(Array)
@@ -25,7 +27,7 @@ describe 'Dashboard facade' do
       it 'returns all followers for the user' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
-        VCR.use_cassette("/facades/dashboard_follower_request") do
+        VCR.use_cassette('/facades/dashboard_follower_request') do
           facade = DashboardFacade.new(user)
 
           expect(facade.followers).to be_a(Array)
@@ -38,7 +40,7 @@ describe 'Dashboard facade' do
       it 'returns all followed users on github' do
         user = create(:user)
         allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
-        VCR.use_cassette("/facades/dashboard_following_request") do
+        VCR.use_cassette('/facades/dashboard_following_request') do
           facade = DashboardFacade.new(user)
 
           expect(facade.following).to be_a(Array)
@@ -70,7 +72,7 @@ describe 'Dashboard facade' do
       end
       it 'returns bookmarks when a user has made bookmarks' do
         user = create(:user)
-        allow_any_instance_of(DashboardFacade).to receive(:bookmarked_videos).and_return(["video"])
+        allow_any_instance_of(DashboardFacade).to receive(:bookmarked_videos).and_return(['video'])
         facade = DashboardFacade.new(user)
 
         expect(facade.bookmark_segment).to eq('bookmarks')
@@ -88,7 +90,7 @@ describe 'Dashboard facade' do
 
       it 'returns github if user is connected to github' do
         user = create(:user)
-        allow_any_instance_of(User).to receive(:github_token).and_return("iamafaketokenhehe")
+        allow_any_instance_of(User).to receive(:github_token).and_return('iamafaketokenhehe')
         facade = DashboardFacade.new(user)
 
         expect(facade.render_github).to eq('github')
@@ -98,7 +100,7 @@ describe 'Dashboard facade' do
     describe '.friends' do
       it 'returns the friends of the current user' do
         user = create(:github_user)
-        potential_friend = create(:github_user, uid: 41562392)
+        potential_friend = create(:github_user, uid: 41_562_392)
         current_friend = create(:github_user)
         requested_friend = create(:github_user)
         current_friend_1 = Friend.create(user: user, friend_user: current_friend)
@@ -113,7 +115,7 @@ describe 'Dashboard facade' do
     describe '.pending_requests' do
       it 'returns the requests the current user has pending' do
         user = create(:github_user)
-        potential_friend = create(:github_user, uid: 41562392)
+        potential_friend = create(:github_user, uid: 41_562_392)
         current_friend = create(:github_user)
         requested_friend = create(:github_user)
         current_friend_1 = Friend.create(user: user, friend_user: current_friend)

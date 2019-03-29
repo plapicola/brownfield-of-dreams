@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.action_controller.default_url_options = { host: 'http://localhost:3000/' }
   # Verifies that versions and hashed value of the package contents in the project's package.json
@@ -64,6 +66,6 @@ Rails.application.configure do
 
   # setup active mailer to use mailcathcer in development mode
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {host: "localhost", port: 3000, protocol: 'http'}
-  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000, protocol: 'http' }
+  config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
 end

@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module YouTube
+  # PORO for storing Video objects from YouTube API
   class Video
     attr_reader :thumbnail
 

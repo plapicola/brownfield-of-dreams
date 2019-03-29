@@ -1,5 +1,7 @@
-class InviteFacade
+# frozen_string_literal: true
 
+# Facade for invite mailer
+class InviteFacade
   def initialize(sender, recipient)
     @sender = sender
     @recipient = recipient
@@ -14,6 +16,6 @@ class InviteFacade
   end
 
   def from_username
-    @sender.first_name + " " + @sender.last_name
+    @sender.first_name + ' ' + @sender.last_name
   end
 end

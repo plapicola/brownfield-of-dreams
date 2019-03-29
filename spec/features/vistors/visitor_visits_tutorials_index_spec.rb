@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Visitor' do
@@ -9,8 +11,8 @@ describe 'Visitor' do
     it 'sees a list of tutorials' do
       visit tutorials_path
 
-      expect(page).to have_css(".tutorial", count: 3)
-      within(page.find_all(".tutorial").first) do
+      expect(page).to have_css('.tutorial', count: 3)
+      within(page.find_all('.tutorial').first) do
         expect(page).to have_link @tutorials.first.title
         expect(page).to have_content @tutorials.first.description
       end
@@ -18,12 +20,12 @@ describe 'Visitor' do
 
     it 'sees only non-classroom content' do
       classroom_tutorial = create(:classroom_tutorial,
-                                  title: "Unique!",
-                                  description: "Also Unique")
+                                  title: 'Unique!',
+                                  description: 'Also Unique')
 
       visit tutorials_path
 
-      expect(page).to have_css(".tutorial", count: 3)
+      expect(page).to have_css('.tutorial', count: 3)
       expect(page).to_not have_link classroom_tutorial.title
       expect(page).to_not have_content classroom_tutorial.description
     end

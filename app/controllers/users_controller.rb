@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Handles user registration and dashboard
 class UsersController < ApplicationController
   before_action :require_validated_login, only: :show
 
@@ -24,12 +27,12 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+    fields = :email, :first_name, :last_name, :password, :password_confirmation
+    params.require(:user).permit(fields)
   end
 
   def onboard_user
     session[:user_id] = @user.id
     redirect_to validation_landing_path
   end
-
 end

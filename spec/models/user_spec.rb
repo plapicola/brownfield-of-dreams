@@ -1,42 +1,47 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
-    it {should validate_presence_of(:email)}
-    it {should validate_presence_of(:first_name)}
-    it {should validate_presence_of(:last_name)}
-    it {should validate_presence_of(:password)}
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:first_name) }
+    it { should validate_presence_of(:last_name) }
+    it { should validate_presence_of(:password) }
 
-    it {should validate_length_of(:first_name).
-        is_at_least(1)
+    it {
+      should validate_length_of(:first_name)
+        .is_at_least(1)
     }
-    it {should validate_length_of(:last_name).
-        is_at_least(1)
+    it {
+      should validate_length_of(:last_name)
+        .is_at_least(1)
     }
-    it {should validate_length_of(:email).
-        is_at_least(1)
+    it {
+      should validate_length_of(:email)
+        .is_at_least(1)
     }
 
-    it {should validate_uniqueness_of(:email)}
-    it {should validate_confirmation_of(:password)}
-    it {should have_secure_password}
+    it { should validate_uniqueness_of(:email) }
+    it { should validate_confirmation_of(:password) }
+    it { should have_secure_password }
   end
 
   describe 'relationships' do
-    it {should have_many :friends}
-    it {should have_many(:friend_users).through(:friends)}
+    it { should have_many :friends }
+    it { should have_many(:friend_users).through(:friends) }
   end
 
   describe 'roles' do
     it 'can be created as default user' do
-      user = User.create(email: 'user@email.com', password: 'password', first_name:'Jim', role: 0)
+      user = User.create(email: 'user@email.com', password: 'password', first_name: 'Jim', role: 0)
 
       expect(user.role).to eq('default')
       expect(user.default?).to be_truthy
     end
 
     it 'can be created as an Admin user' do
-      admin = User.create(email: 'admin@email.com', password: 'admin', first_name:'Bob', role: 1)
+      admin = User.create(email: 'admin@email.com', password: 'admin', first_name: 'Bob', role: 1)
 
       expect(admin.role).to eq('admin')
       expect(admin.admin?).to be_truthy
@@ -60,6 +65,20 @@ RSpec.describe User, type: :model do
         expected = [video_1, video_3, video_4]
 
         expect(User.bookmarked_videos(user)).to eq(expected)
+      end
+    end
+
+    describe 'pending_requests' do
+      it 'Returns the pending friend requests for a user' do
+        user = create(:github_user)
+        potential_friend = create(:github_user, uid: 41_562_392)
+        current_friend = create(:github_user)
+        requested_friend = create(:github_user)
+        current_friend_1 = Friend.create(user: user, friend_user: current_friend)
+        current_friend_2 = Friend.create(user: current_friend, friend_user: user)
+        requested_friend_1 = Friend.create(user: requested_friend, friend_user: user)
+
+        expect(User.pending_requests(user)).to eq([requested_friend])
       end
     end
   end

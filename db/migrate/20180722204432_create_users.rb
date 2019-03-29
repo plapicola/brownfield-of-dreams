@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Migration to create users table through ActiveRecord
 class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|

@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Get Started' do
   it 'shows information about how to interact with the application' do
     visit get_started_path
 
-    filter_text = 'Filter results by selecting a filter on the side bar ' +
+    filter_text = 'Filter results by selecting a filter on the side bar ' \
                   'of the homepage.'
 
-    sign_in_text = 'Sign in with census if you are a current student for ' +
+    sign_in_text = 'Sign in with census if you are a current student for ' \
                    'additional content.'
 
     expect(page).to have_content 'Browse tutorials from the homepage.'
@@ -27,7 +29,7 @@ describe 'Get Started' do
   it 'links to the homepage' do
     visit get_started_path
 
-    within (page.find_all("li")[0]) do
+    within (page.find_all('li')[0]) do
       click_link 'homepage'
     end
 
@@ -35,7 +37,7 @@ describe 'Get Started' do
 
     visit get_started_path
 
-    within (page.find_all("li")[1]) do
+    within (page.find_all('li')[1]) do
       click_link 'homepage'
     end
 

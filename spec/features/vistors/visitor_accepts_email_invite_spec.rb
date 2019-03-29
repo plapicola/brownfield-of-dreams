@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'as visitor', :js do
   it 'brings me to the registration page when i accept an email invite' do
-    VCR.use_cassette("feature/invitation_acceptance") do
+    VCR.use_cassette('feature/invitation_acceptance') do
       user = create(:user)
       user.github_token = ENV['GITHUB_API_KEY']
-      InviteMailer.invite(user, "plapicola").deliver_now
+      InviteMailer.invite(user, 'plapicola').deliver_now
 
       visit 'http://localhost:1080'
 

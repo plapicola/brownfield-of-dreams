@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 context 'As a user without a github token' do
@@ -24,7 +26,6 @@ context 'As a user without a github token' do
     fill_in 'session[password]', with: @user.password
     click_button 'Log In'
     stub_github
-
 
     VCR.use_cassette('views/dashboard_github_request') do
       click_button 'Connect to GitHub'
