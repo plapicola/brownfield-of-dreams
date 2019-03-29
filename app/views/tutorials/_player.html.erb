@@ -1,9 +1,10 @@
 <div class="col col-8">
+  <div id="bookmark-outcome">
+  </div>
   <div class="title-bookmark">
     <h3><%= facade.current_video.title %></h3>
     <div class="bookmarks-btn">
       <%= button_tag "Bookmark",type: 'button', onclick: 'bookmarkVideo()', class: "btn btn-outline mb1 teal" %>
-      <!-- user_videos_path(video_id: facade.current_video.id) -->
     </div>
   </div>
 
@@ -42,8 +43,6 @@
 
     function bookmarkVideo() {
       document.getElementById("bookmark-outcome").innerHTML = '';
-      await sleep(150)
-      console.log('<%= facade.current_video.video_id %>')
       fetch('/api/v1/bookmarks', {
         method: "POST",
         headers: {
@@ -52,6 +51,7 @@
         body: JSON.stringify({video_id:"<%= facade.current_video.id %>", authenticity_token:"<%= form_authenticity_token %>"})
       })
       .then(function(response){
+        console.log(response.status)
         let target = document.getElementById("bookmark-outcome")
         target.style.display = "block";
         if (response.status === 302) {
@@ -59,7 +59,7 @@
         } else if (response.status === 200){
           target.innerHTML = "You've successfully bookmarked the video!";
         } else {
-          target.innerHTML = "Something went wrong. If the problem continues please contact Jeff.";
+          target.innerHTML = "";
         }
       });
     }
