@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Mailer for sending validation emails to new users
 class ValidationMailer < ApplicationMailer
   def validate(user)
     @user = user

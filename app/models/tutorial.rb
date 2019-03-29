@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Model for Tutorials table in database
 class Tutorial < ApplicationRecord
   has_many :videos, -> { order(position: :ASC) }, dependent: :destroy
   acts_as_taggable_on :tags, :tag_list

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Handles friend request generation, acceptance, and declines for users
 class FriendsController < ApplicationController
   def create
     friend_user = User.find_by_uid(params[:friend_uid])

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Provides connectivity and interpretation for github API requests
 class GithubService
   def initialize(user)
     @user = user
@@ -18,7 +19,7 @@ class GithubService
   end
 
   def get_user(username)
-    @email ||= get_json("/users/#{username}")
+    @get_user ||= get_json("/users/#{username}")
   end
 
   private

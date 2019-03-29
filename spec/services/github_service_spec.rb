@@ -6,7 +6,7 @@ describe 'Github Service' do
   it 'exists' do
     user = create(:user)
 
-    service = GithubService.new(nil)
+    service = GithubService.new(user)
 
     expect(service).to be_a(GithubService)
   end
@@ -15,7 +15,8 @@ describe 'Github Service' do
     describe '.user_repositories' do
       it 'returns repository info for the current user' do
         user = create(:user)
-        allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
+        allow_any_instance_of(User).to receive(:github_token)
+          .and_return(ENV['GITHUB_API_KEY'])
 
         result = VCR.use_cassette('services/user_repositories') do
           GithubService.new(user).user_repositories
@@ -31,7 +32,8 @@ describe 'Github Service' do
     describe '.user_followers' do
       it 'returns follower info for the current user' do
         user = create(:user)
-        allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
+        allow_any_instance_of(User).to receive(:github_token)
+          .and_return(ENV['GITHUB_API_KEY'])
 
         result = VCR.use_cassette('services/user_followers') do
           GithubService.new(user).user_followers
@@ -47,7 +49,8 @@ describe 'Github Service' do
     describe '.user_following' do
       it 'returns users being followed by the current user' do
         user = create(:user)
-        allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
+        allow_any_instance_of(User).to receive(:github_token)
+          .and_return(ENV['GITHUB_API_KEY'])
 
         result = VCR.use_cassette('services/user_following') do
           GithubService.new(user).user_following
@@ -63,7 +66,8 @@ describe 'Github Service' do
     describe '.get_user' do
       it 'returns the email address for a github user' do
         user = create(:user)
-        allow_any_instance_of(User).to receive(:github_token).and_return(ENV['GITHUB_API_KEY'])
+        allow_any_instance_of(User).to receive(:github_token)
+          .and_return(ENV['GITHUB_API_KEY'])
 
         result = VCR.use_cassette('services/github_email') do
           GithubService.new(user).get_user('plapicola')

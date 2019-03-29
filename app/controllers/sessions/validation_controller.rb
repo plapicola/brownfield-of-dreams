@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
-class Sessions::ValidationController < ApplicationController
-  before_action :require_unverified_login
+module Sessions
+  # Handles validation of new users provided email verification links
+  class ValidationController < ApplicationController
+    before_action :require_unverified_login
 
-  def index
-    ValidationMailer.validate(current_user).deliver_now
-  end
+    def index
+      ValidationMailer.validate(current_user).deliver_now
+    end
 
-  def show
-    # Require user to be logged in to ensure validation is for correct account
-    current_user.update(verified: true) if current_user.id == params[:id].to_i
-    redirect_to dashboard_path
+    def show
+      # Require user to be logged in to ensure validation is for correct account
+      current_user.update(verified: true) if current_user.id == params[:id].to_i
+      redirect_to dashboard_path
+    end
   end
 end

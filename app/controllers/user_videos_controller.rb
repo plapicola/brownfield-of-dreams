@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
+# Handles new bookmarks for user
 class UserVideosController < ApplicationController
   before_action :require_login
-
-  def new; end
 
   def create
     user_video = current_user.user_videos.new(user_video_params)
@@ -23,9 +22,8 @@ class UserVideosController < ApplicationController
   end
 
   def require_login
-    unless current_user
-      flash[:error] = 'You must be logged in to bookmark a video.'
-      redirect_to login_path
-    end
+    error = 'You must be logged in to bookmark a video.'
+    flash[:error] = error unless current_user
+    redirect_to login_path unless current_user
   end
 end

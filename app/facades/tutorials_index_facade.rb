@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
+# Facade for the tutorials index
 class TutorialsIndexFacade
   def initialize(user)
     @user = user
   end
 
   def tutorials
-    @tutorial ||= if @user
-                    Tutorial.all
-                  else
-                    Tutorial.public_tutorials
-                  end
+    @tutorials ||= if @user
+                     Tutorial.all
+                   else
+                     Tutorial.public_tutorials
+                   end
   end
 end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# PORO for storing repository information from GitHub API
 class Repository
   attr_reader :name,
               :url

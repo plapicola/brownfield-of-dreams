@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Testing helper for OmniAuth gem allowing for mocked requests
 module OmniauthHelper
   def stub_github
     OmniAuth.config.test_mode = true

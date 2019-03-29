@@ -67,5 +67,19 @@ RSpec.describe User, type: :model do
         expect(User.bookmarked_videos(user)).to eq(expected)
       end
     end
+
+    describe 'pending_requests' do
+      it 'Returns the pending friend requests for a user' do
+        user = create(:github_user)
+        potential_friend = create(:github_user, uid: 41_562_392)
+        current_friend = create(:github_user)
+        requested_friend = create(:github_user)
+        current_friend_1 = Friend.create(user: user, friend_user: current_friend)
+        current_friend_2 = Friend.create(user: current_friend, friend_user: user)
+        requested_friend_1 = Friend.create(user: requested_friend, friend_user: user)
+
+        expect(User.pending_requests(user)).to eq([requested_friend])
+      end
+    end
   end
 end

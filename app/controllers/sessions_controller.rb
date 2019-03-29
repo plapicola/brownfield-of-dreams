@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
+# Handles login and authentication of users into session hash
 class SessionsController < ApplicationController
-  def new
-    @user ||= User.new
-  end
-
   def create
     user = User.find_by(email: params[:session][:email])
     if user&.authenticate(params[:session][:password])
