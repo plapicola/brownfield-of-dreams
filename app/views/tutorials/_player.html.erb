@@ -59,7 +59,7 @@
         } else if (response.status === 200){
           target.innerHTML = "You've successfully bookmarked the video!";
         } else {
-          target.innerHTML = "";
+          target.innerHTML = 'You must be <%= raw link_to "logged in", login_path %> to bookmark a video.';
         }
       });
     }
