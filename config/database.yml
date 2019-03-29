@@ -88,4 +88,6 @@ test:
 #
 production:
   <<: *default
-  database: brownfield_development
+  database: brownfield_production
+  username: brownfield
+  password: <%= ENV['BROWNFIELD_DATABASE_PASSWORD'] %>
