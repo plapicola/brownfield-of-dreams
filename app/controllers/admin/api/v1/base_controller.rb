@@ -18,7 +18,7 @@ module Admin
                               User.new
                             end
         end
-        
+
         def four_oh_four
           raise ActionController::RoutingError, 'Not Found'
         end
